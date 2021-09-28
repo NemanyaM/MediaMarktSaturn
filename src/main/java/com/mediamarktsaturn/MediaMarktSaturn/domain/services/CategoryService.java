@@ -38,9 +38,8 @@ public class CategoryService {
         if (duplicates != 0) {
             throw new IllegalArgumentException("Record with the same name already exists.");
         }
-        repository.save(category);
 
-        return category;
+        return repository.save(category);
     }
 
     public Category updateCategory(Long id, Category category) {
@@ -50,9 +49,8 @@ public class CategoryService {
             throw new IllegalArgumentException("Record with the same name already exists.");
         }
         Category updated = old.updateWith(category);
-        repository.save(updated);
 
-        return updated;
+        return repository.save(updated);
     }
 
     public Category patchCategory(Long id, Map<Object, Object> fields) {

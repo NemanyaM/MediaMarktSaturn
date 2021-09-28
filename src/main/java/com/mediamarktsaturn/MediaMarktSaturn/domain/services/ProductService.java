@@ -39,9 +39,8 @@ public class ProductService {
         if (duplicates != 0) {
             throw new IllegalArgumentException("Record with the same name already exists.");
         }
-        repository.save(product);
 
-        return product;
+        return repository.save(product);
     }
 
     public Product updateProduct(Long id, Product product) {
@@ -51,9 +50,8 @@ public class ProductService {
             throw new IllegalArgumentException("Record with the same name already exists.");
         }
         Product updated = old.updateWith(product);
-        repository.save(updated);
 
-        return updated;
+        return repository.save(updated);
     }
 
     public Product patchProduct(Long id, Map<Object, Object> fields) {
