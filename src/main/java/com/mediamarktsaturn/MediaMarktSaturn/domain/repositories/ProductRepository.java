@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    @Query(value = "select count(*) from PRODUCT where name = ?1", nativeQuery = true)
+    @Query(value = "select count(*) from PRODUCT where name = ?name", nativeQuery = true)
     int findByName(String name);
 
     @Query(value = "WITH RECURSIVE product_path (id, parent_id, name, onlineStatus, longDescription, shortDescription, path) AS (\n" +
@@ -17,7 +17,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "    FROM product p\n" +
             "        JOIN product_category pc ON p.id = pc.product_id\n" +
             "        JOIN category c ON pc.category_id = c.id\n" +
-            "    WHERE p.id = ?1\n" +
+            "    WHERE p.id = ?id\n" +
             "    UNION ALL\n" +
             "    select anc.id, c.parent_id, anc.name, onlineStatus, longDescription, shortDescription, CONCAT(c.name, '/', anc.path)\n" +
             "    from category c\n" +
